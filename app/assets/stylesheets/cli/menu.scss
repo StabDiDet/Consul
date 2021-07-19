@@ -1,0 +1,33 @@
+@media screen and (max-width: 39.9375em) {
+	.subnavigation.row {
+		left: 8px;
+	}
+}
+
+.header-title {
+  display: none;
+}
+
+@media screen and (min-width: 40em) {
+  .header-title {
+    display: block;
+    font-size: 2em;
+    line-height: 1.2;
+    padding-bottom: 0.5em;
+    padding-top: 0.75em;
+
+    span {
+      font-weight: normal;
+    }
+  }
+
+  .subnavigation ul.main-menu {
+    .nav-flyout-block {
+      .projekt-name,
+      li.nav-element a {
+        color: $flyout-item-text-color;
+        background: $flyout-item-bg-color;
+      }
+    }
+  }
+}

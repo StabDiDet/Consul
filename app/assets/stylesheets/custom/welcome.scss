@@ -8,6 +8,7 @@
 
   .jumbo {
   
+    display: none;
     background-position: $welcomebgposition;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -73,6 +74,7 @@
     }
 
     @media only screen and (min-width: 640px) and (max-width: 768px) {
+      display: block;
       padding-top: 20px;
       padding-bottom: rem-calc(150);
 
@@ -101,6 +103,7 @@
     }
 
     @media only screen and (min-width: 768px) and (max-width: 1280px) {
+      display: block;
       height: 380px;
       background-position: $welcomebgposition;
       padding-top: $welcometextpositionmedium;
@@ -133,6 +136,7 @@
     }
 
     @media only screen and (min-width: 1280px) and (max-width: 1900px) {
+      display: block;
       height: 500px;
       background-position: $welcomebgposition;
       padding-top: $welcometextpositionmedium;
@@ -165,6 +169,7 @@
     }
 
     @media only screen and (min-width: 1900px) {
+      display: block;
       height: 600px;
       background-position: $welcomebgposition;
       padding-top: $welcometextpositionlarge;

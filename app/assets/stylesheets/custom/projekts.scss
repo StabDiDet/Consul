@@ -452,6 +452,7 @@ div.projekt-phase-geozone-restriction-selector {
     height: 14px;
     width: 4px;
     border-radius: 2px;
+    background-color: $brand;
   }
 
   input:checked ~ .checkmark:before {
