@@ -31,3 +31,13 @@
     }
   }
 }
+
+// flyout menu on top of maps
+
+.nav-flyout-block {
+  z-index: 1001;
+}
+
+.leaflet-container {
+  z-index: 1;
+}
