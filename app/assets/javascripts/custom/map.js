@@ -135,15 +135,27 @@
         }
       };
 
-      mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
+      var overlayStadtRadwege = L.tileLayer.wms(mapTilesProvider, {
+        attribution: mapAttribution,
+        layers: 'radnetz_beteiligung',
+        format: 'image/png',
+        transparent: true
+      });
 
+      mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
 
       map = L.map(element.id, {
         gestureHandling: true,
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
+      L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: mapAttribution
+      }).addTo(map);
 
+      overlayStadtRadwege.addTo(map);
+
+      // L.control.layers(baseMaps).addTo(map);
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
@@ -152,9 +164,7 @@
 
       App.Map.maps.push(map);
 
-      L.tileLayer(mapTilesProvider, {
-        attribution: mapAttribution
-      }).addTo(map);
+
 
 
       var search = new GeoSearch.GeoSearchControl({
