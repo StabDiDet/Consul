@@ -136,11 +136,14 @@
       };
 
       var overlayStadtRadwege = L.tileLayer.wms(mapTilesProvider, {
-        attribution: mapAttribution,
         layers: 'radnetz_beteiligung',
         format: 'image/png',
         transparent: true
       });
+
+      var overlayMaps = {
+        "Radwege": overlayStadtRadwege
+      };
 
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
 
@@ -153,7 +156,7 @@
         attribution: mapAttribution
       }).addTo(map);
 
-      overlayStadtRadwege.addTo(map);
+      L.control.layers({}, overlayMaps).addTo(map);
 
       // L.control.layers(baseMaps).addTo(map);
 
