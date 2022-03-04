@@ -135,14 +135,28 @@
         }
       };
 
-      var overlayStadtRadwege = L.tileLayer.wms(mapTilesProvider, {
-        layers: 'radnetz_beteiligung',
+      var overlayRadnetz = L.tileLayer.wms(mapTilesProvider, {
+        layers: 'radnetz',
+        format: 'image/png',
+        transparent: true
+      });
+
+      var overlayWegeweisung = L.tileLayer.wms(mapTilesProvider, {
+        layers: 'wegeweisung_radverkehr_detmold',
+        format: 'image/png',
+        transparent: true
+      });
+
+      var overlayStadtgrenze = L.tileLayer.wms(mapTilesProvider, {
+        layers: 'stadtgrenze',
         format: 'image/png',
         transparent: true
       });
 
       var overlayMaps = {
-        "Radwege": overlayStadtRadwege
+        "Radwege": overlayRadnetz,
+        "Wegeweisung Radverkehr Detmold": overlayWegeweisung,
+        "Stadtgrenze": overlayStadtgrenze
       };
 
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
