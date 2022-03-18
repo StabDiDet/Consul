@@ -154,8 +154,8 @@
       });
 
       var overlayMaps = {
-        "Radwege": overlayRadnetz,
-        "Wegeweisung Radverkehr Detmold": overlayWegeweisung,
+        "Hauptverbindungen - Konzept": overlayRadnetz,
+        "Wegweisende Beschilderung - Detmold": overlayWegeweisung,
         "Stadtgrenze": overlayStadtgrenze
       };
 
