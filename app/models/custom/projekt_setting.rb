@@ -114,23 +114,6 @@ class ProjektSetting < ApplicationRecord
         "projekt_custom_feature.default_footer_tab": nil
       }
     end
-
-    def ensure_existence
-      Projekt.all.each do |projekt|
-
-        defaults.each do |name, value|
-          unless find_by(key: name, projekt_id: projekt.id)
-            self.create(key: name, value: value, projekt_id: projekt.id)
-          end
-        end
-
-      end
-    end
-
-    def destroy_obsolete
-      ProjektSetting.all.each{ |setting| setting.destroy unless defaults.keys.include?(setting.key.to_sym) }
-    end
-
   end
 
   def enabled?
