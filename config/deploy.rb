@@ -95,8 +95,6 @@ task :add_new_settings do
       with rails_env: fetch(:rails_env) do
         execute :rake, "settings:add_new_settings"
         execute :rake, "settings:destroy_obsolete"
-        execute :rake, "projekt_settings:ensure_existence"
-        execute :rake, "projekt_settings:destroy_obsolete"
         execute :rake, "deficiency_report_statuses:add_default_statuses"
       end
     end
