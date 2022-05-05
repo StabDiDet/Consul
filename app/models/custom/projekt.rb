@@ -60,33 +60,31 @@ class Projekt < ApplicationRecord
   scope :activated, -> { joins( 'INNER JOIN projekt_settings act ON projekts.id = act.projekt_id' ).
                          where( 'act.key': 'projekt_feature.main.activate', 'act.value': 'active' ) }
 
-  scope :current, ->(timestamp = Date.today) {
-    activated
-      .where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today )
-      .where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today)
-  }
-  scope :active, -> { current }
+  scope :current, ->(timestamp = Date.today) { activated.
+                                               where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today ).
+                                               where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today) }
 
-  scope :not_active, -> {
-    activated
-      .where.not( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today )
-      .where.not( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today)
+  scope :active, -> {
+    current
+      .includes(:projekt_phases)
+      .select { |p| p.projekt_phases.any? { |phase| phase.current? }}
   }
 
   scope :ongoing, -> {
-    activated
-      .joins(:projekt_phases)
-      .where( "projekt_phases.start_date <= ?", Date.today )
-      .where( "projekt_phases.end_date >= ?", Date.today )
+    current
+      .includes(:projekt_phases)
+      .select { |p| p.projekt_phases.all? { |phase| !phase.current? }}
   }
 
   scope :upcoming, -> {
     activated
-      .where( "total_duration_end > ?", Date.today)
+      .where( "total_duration_start > ?", Date.today)
   }
 
-  scope :expired, ->(timestamp = Date.today) { activated.
-                                               where( "total_duration_end < ?", Date.today) }
+  scope :expired, ->(timestamp = Date.today) {
+    activated
+      .where( "total_duration_end < ?", Date.today)
+  }
 
   scope :visible_in_menu, -> { joins( 'INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id').
                                where( 'vim.key': 'projekt_feature.general.show_in_navigation', 'vim.value': 'active' ) }
@@ -192,9 +190,7 @@ class Projekt < ApplicationRecord
   end
 
   def comments_allowed?(current_user)
-    current_user.level_two_or_three_verified? &&
-      current? &&
-      comment_phase.current?
+    comment_phase.selectable_by?(current_user)
   end
 
   def calculate_level(counter = 1)
