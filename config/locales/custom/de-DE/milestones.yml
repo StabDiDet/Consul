@@ -4,5 +4,5 @@ de:
       no_milestones: Keine definierten Meilensteine vorhanden
       progress: Fortschritte
     show:
-      publication_date: "Veröffentlicht %{publication_date}"
+      publication_date: "Erledigt %{publication_date}"
       status_changed: Status geändert zu
