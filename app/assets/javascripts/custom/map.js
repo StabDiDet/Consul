@@ -173,10 +173,13 @@
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
-      L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: mapAttribution
       }).addTo(map);
 
+      overlayRadnetz.addTo(map);
+      overlayWegeweisung.addTo(map);
+      overlayStadtgrenze.addTo(map);
       L.control.layers({}, overlayMaps).addTo(map);
 
       // L.control.layers(baseMaps).addTo(map);
