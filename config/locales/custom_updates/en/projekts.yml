@@ -42,6 +42,7 @@ en:
           budgets: Budgets
           milestones: Milestones
           project_events: Events
+          projekt_questions: Questions
         projekt_events_tab:
           title: Events
           no_events: No events
