@@ -206,8 +206,6 @@
       if ( typeof layersData !== "undefined"  ) {
         layersData.forEach(createLayer);
       }
-      ensureBaseLayerExistence();
-      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
 
       if ( Object.keys(overlayLayers).length > 0 ) {
         for (let i = 0; i < Object.keys(overlayLayers).length; i++ ) {
@@ -218,6 +216,9 @@
 
         L.control.layers(baseLayers, overlayLayers).addTo(map);
       }
+
+      ensureBaseLayerExistence();
+      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
 
 ///
 
