@@ -1,10 +1,10 @@
 def content
   '
-    <p>All text strings used in your Consul applications are listed on this page. If you\'d like to change any of these strings, you just need to edit it and hit \'Save\' button at the bottom of this page.</p>
+    <p>Alle in Ihren Consul-Anwendungen verwendeten Textzeichenfolgen sind auf dieser Seite aufgeführt. Wenn Sie eine dieser Zeichenfolgen ändern möchten, brauchen Sie sie nur zu bearbeiten und auf die Schaltfläche "Speichern" unten auf dieser Seite zu klicken.</p>
 
-    <p>In order to locate the string to edit, invoke the search function of your browser and search for the text that you want to change. In most browsers, you can do that by clicking Ctrl+F (or Cmd+F, if you\'re using a Mac).</p>
+    <p>Um die zu bearbeitende Zeichenfolge zu finden, rufen Sie die Suchfunktion Ihres Browsers auf und suchen Sie nach dem Text, den Sie ändern möchten. In den meisten Browsern können Sie das tun, indem Sie auf Strg+F klicken (oder Cmd+F, wenn Sie einen Mac verwenden). Es kann vorkommen, dass Sie mehrere Zeichenfolgen mit demselben Text finden. Das passiert, wenn derselbe Text an zwei (oder mehr) Stellen verwendet wird. Prüfen Sie in diesem Fall einfach den Schlüssel über dem Textfeld, das die Zeichenfolge enthält, und Sie erhalten einen Hinweis darauf, wo diese Zeichenfolge verwendet wird.</p>
 
-    <p>If might encounter several strings with the same text.  It happens when the same text is used in two (or more) locations. In this case just check the key above the text filed containing the string, it will give you a hint as to where this specific string is used. For example, the key proposals.index.featured_proposals indicates that the text in the text field below it, is used to  label featured proposals on proposals index page.</p>
+    <p>Zum Beispiel zeigt der Schlüssel proposals.index.featured_proposals an, dass der Text im Textfeld darunter verwendet wird, um "featured proposals" auf der Indexseite für Vorschläge zu kennzeichnen.</p>
   '
 end
 
