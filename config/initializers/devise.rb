@@ -257,7 +257,7 @@ Devise.setup do |config|
     name: :servicekonto_nrv,
     discovery: true,
     issuer: servicekonto_nrv[:connect_issuer],
-    scope: [:openid, :email, :profile, :name, :id, :phone, :artistic_name],
+    scope: [:openid, :email, :profile, :name, :id, :phone, :artistic_name, :address],
     client_auth_method: 'basic',
     # client_auth_method: 'jwks',
     response_type: :code,
