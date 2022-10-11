@@ -34,11 +34,10 @@ gem "jquery-fileupload-rails"
 gem "jquery-rails", "~> 4.4.0"
 gem "jquery-ui-rails", "~> 6.0.1"
 gem "kaminari", "~> 1.2.1"
-gem "mini_magick", "~> 4.11.0"
-gem "omniauth", "~> 2.0.4"
-gem "omniauth-facebook", "~> 8.0.0"
-gem "omniauth-google-oauth2", "~> 1.0.0"
-gem "omniauth-rails_csrf_protection", "~> 1.0.0"
+gem "omniauth", "~> 1.9.1" # older version
+gem "omniauth-facebook", "~> 7.0.0" # older version
+gem "omniauth-google-oauth2", "~> 0.8.0" # older version
+gem "omniauth-rails_csrf_protection", "~> 0.1.2" #older version
 gem "omniauth-twitter", "~> 1.4.0"
 gem "paranoia", "~> 2.4.3"
 gem "pg", "~> 1.2.3"

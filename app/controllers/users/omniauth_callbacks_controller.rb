@@ -15,6 +15,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in_with :wordpress_login, :wordpress_oauth2
   end
 
+  def servicekonto_nrv
+    sign_in_with :servicekonto_nrv_login, :servicekonto_nrv
+  end
+
   def after_sign_in_path_for(resource)
     if resource.registering_with_oauth
       finish_signup_path
@@ -29,7 +33,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       raise ActionController::RoutingError, "Not Found" unless Setting["feature.#{feature}"]
 
       auth = request.env["omniauth.auth"]
-
       identity = Identity.first_or_create_from_oauth(auth)
       @user = current_user || identity.user || User.first_or_initialize_for_oauth(auth)
 
