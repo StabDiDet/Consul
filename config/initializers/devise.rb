@@ -251,53 +251,29 @@ Devise.setup do |config|
                   strategy_class: OmniAuth::Strategies::Wordpress,
                   client_options: { site: Rails.application.secrets.wordpress_oauth2_site }
 
-  # config.omniauth :openid_connect, {
-  #   name: :openid_connect,
-  #         discovery: Rails.application.secrets.openid_connect_discovery,
-  #         issuer: Rails.application.secrets.openid_connect_issuer,
-  #         client_auth_method: 'basic',
-  #   scope: [:openid, :email],
-  #   response_type: :code,
-  #   uid_field: "preferred_username",
-  #   client_options: {
-  #     port: Rails.application.secrets.openid_connect_port,
-  #     scheme: Rails.application.secrets.openid_connect_scheme,
-  #     host: Rails.application.secrets.openid_connect_host,
-  #     identifier: Rails.application.secrets.openid_connect_key,
-  #     secret: Rails.application.secrets.openid_connect_secret,
-  #     authorization_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/auth",
-  #     token_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/token",
-  #     userinfo_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/userinfo",
-  #     jwks_uri: 'http://localhost:8080' + "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/certs",
-  #     redirect_uri: Rails.application.secrets.openid_connect_redirect_uri,
-  #   }
-  # }
+  servicekonto_nrv = Rails.application.secrets.servicekonto_nrv_openid_login
 
   config.omniauth :openid_connect, {
     name: :servicekonto_nrv,
     discovery: true,
-    issuer: Rails.application.secrets.openid_connect_issuer,
-    # scope: [:openid, :email],
+    issuer: servicekonto_nrv[:connect_issuer],
     scope: [:openid, :email, :profile, :name, :id, :phone, :artistic_name],
     client_auth_method: 'basic',
     # client_auth_method: 'jwks',
     response_type: :code,
     uid_field: "sub",
     client_options: {
-      # port: Rails.application.secrets.openid_connect_port,
-      # scheme: Rails.application.secrets.openid_connect_scheme,
-      host: Rails.application.secrets.openid_connect_host,
-      identifier: Rails.application.secrets.openid_connect_key,
-      secret: Rails.application.secrets.openid_connect_secret,
-      authorization_endpoint: Rails.application.secrets.openid_authorization_endpoint,
-      token_endpoint: Rails.application.secrets.openid_token_endpoint,
+      host: servicekonto_nrv[:connect_host],
+      identifier: servicekonto_nrv[:connect_key],
+      secret: servicekonto_nrv[:connect_secret],
+      authorization_endpoint: servicekonto_nrv[:authorization_endpoint],
+      token_endpoint: servicekonto_nrv[:token_endpoint],
       token_endpoint_auth_method: 'client_secret_basic',
-      userinfo_endpoint: Rails.application.secrets.openid_userinfo_endpoint,
-      jwks_uri: Rails.application.secrets.openid_jwks_uri,
-      redirect_uri: Rails.application.secrets.openid_connect_redirect_uri
+      userinfo_endpoint: servicekonto_nrv[:userinfo_endpoint],
+      jwks_uri: servicekonto_nrv[:jwks_uri],
+      redirect_uri: servicekonto_nrv[:connect_redirect_uri]
     },
     strategy_class: OmniAuth::Strategies::OpenIDConnect
-    # kc_idp_hint: Rails.application.secrets.servicekonto_nrv_kc_idp_hint
   }
 
   # ==> Warden configuration
