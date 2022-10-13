@@ -4,16 +4,84 @@ $base-font-size:      16px;
 
 @font-face {
   font-family: "source_sans_pro";
-  src: font-url("SourceSansPro-Black.ttf") format("truetype");
-  src: font-url("SourceSansPro-BlackItalic.ttf") format("truetype");
-  src: font-url("SourceSansPro-Bold.ttf") format("truetype");
-  src: font-url("SourceSansPro-BoldItalic.ttf") format("truetype");
-  src: font-url("SourceSansPro-ExtraLight.ttf") format("truetype");
-  src: font-url("SourceSansPro-ExtraLightItalic.ttf") format("truetype");
-  src: font-url("SourceSansPro-Italic.ttf") format("truetype");
-  src: font-url("SourceSansPro-Light.ttf") format("truetype");
-  src: font-url("SourceSansPro-LightItalic.ttf") format("truetype");
-  src: font-url("SourceSansPro-Regular.ttf") format("truetype");
-  src: font-url("SourceSansPro-SemiBold.ttf") format("truetype");
-  src: font-url("SourceSansPro-SemiBoldItalic.ttf") format("truetype");
+  src: font-url("custom/source_sans_pro/SourceSansPro-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "source_sans_pro";
+  src: font-url("custom/source_sans_pro/SourceSansPro-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
 }
