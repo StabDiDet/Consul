@@ -34,6 +34,7 @@ gem "jquery-fileupload-rails"
 gem "jquery-rails", "~> 4.4.0"
 gem "jquery-ui-rails", "~> 6.0.1"
 gem "kaminari", "~> 1.2.1"
+gem "mini_magick", "~> 4.11.0"
 gem "omniauth", "~> 1.9.1" # older version
 gem "omniauth-facebook", "~> 7.0.0" # older version
 gem "omniauth-google-oauth2", "~> 0.8.0" # older version
