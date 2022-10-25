@@ -35,22 +35,26 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       auth = request.env["omniauth.auth"]
       identity = Identity.first_or_create_from_oauth(auth)
       @user = current_user || identity.user || User.first_or_initialize_for_oauth(auth)
+      user_should_be_verified = false
 
-      if provider == :servicekonto_nrv && @user.new_record?
-        user_should_be_verified = (
-          @user.new_record? || (current_user.present? && current_user.verified_at.blank?)
-        )
-
+      if provider == :servicekonto_nrv
         if current_user.present? && current_user.email != auth.info.email
           existing_non_logined_user_with_same_email = User.find_by(email: auth.info.email)
 
           if existing_non_logined_user_with_same_email.present?
-            redirect_to :back and return
+            flash[:alert] = "Please log in with your other account: #{auth.info.email}"
+            redirect_to(account_path) and return
           else
             current_user.update!(email: auth.info.email)
           end
         end
 
+        user_should_be_verified = (
+          @user.new_record? || (current_user.present? && current_user.verified_at.blank?)
+        )
+      end
+
+      if provider == :servicekonto_nrv && @user.new_record?
         # TODO check if email confimation nedeed
         @user.skip_confirmation!
         @user.skip_confirmation_notification!
