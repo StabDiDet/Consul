@@ -3,6 +3,12 @@ class ProjektPhase::CommentPhase < ProjektPhase
     active?
   end
 
+  def selectable_by?(user)
+    user.present? &&
+      geozone_allowed?(user) &&
+      current?
+  end
+
   def name
     'comment_phase'
   end
