@@ -54,8 +54,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         )
       end
 
-      if provider == :servicekonto_nrv && @user.new_record?
-        # TODO check if email confimation nedeed
+      if provider == :servicekonto_nrv
         @user.skip_confirmation!
         @user.skip_confirmation_notification!
       end
