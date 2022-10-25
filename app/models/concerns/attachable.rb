@@ -6,7 +6,6 @@ module Attachable
     attr_accessor :cached_attachment
 
     validates :attachment,
-      presence: true,
       file_content_type: {
         allow: ->(record) { record.accepted_content_types },
         if: -> { association_class && attachment.attached? },

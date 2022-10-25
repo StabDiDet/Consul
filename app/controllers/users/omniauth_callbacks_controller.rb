@@ -36,8 +36,33 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       identity = Identity.first_or_create_from_oauth(auth)
       @user = current_user || identity.user || User.first_or_initialize_for_oauth(auth)
 
+      if provider == :servicekonto_nrv && @user.new_record?
+        user_should_be_verified = (
+          @user.new_record? || (current_user.present? && current_user.verified_at.blank?)
+        )
+
+        if current_user.present? && current_user.email != auth.info.email
+          existing_non_logined_user_with_same_email = User.find_by(email: auth.info.email)
+
+          if existing_non_logined_user_with_same_email.present?
+            redirect_to :back and return
+          else
+            current_user.update!(email: auth.info.email)
+          end
+        end
+
+        # TODO check if email confimation nedeed
+        @user.skip_confirmation!
+        @user.skip_confirmation_notification!
+      end
+
       if save_user
         identity.update!(user: @user)
+
+        if provider == :servicekonto_nrv && user_should_be_verified
+          verify_user_with_servicekonto(@user, auth)
+        end
+
         sign_in_and_redirect @user, event: :authentication
         set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
       else
@@ -48,5 +73,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def save_user
       @user.save || @user.save_requiring_finish_signup
+    end
+
+    def verify_user_with_servicekonto(user, auth)
+      address_data = auth.extra.raw_info["http://www.governikus.de/sk/addresses"]
+      street = address_data.street_address
+
+      geozone = Geozone.find_with_plz(address_data.postal_code)
+
+      user.update!(
+        street_name: street.gsub(/\s\d+/, ""),
+        street_number: street.match(/\d+/)[0],
+        city_name: address_data.locality,
+        verified_at: Time.current,
+        geozone: geozone,
+        date_of_birth: DateTime.parse(auth.extra.raw_info.birthdate),
+        plz: address_data.postal_code
+      )
     end
 end
