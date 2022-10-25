@@ -50,7 +50,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         user_should_be_verified = (
-          @user.new_record? || (current_user.present? && current_user.verified_at.blank?)
+          @user.new_record? || (current_user.present? && current_user.verified_at.blank? && existing_non_logined_user_with_same_email.blank?)
         )
       end
 
