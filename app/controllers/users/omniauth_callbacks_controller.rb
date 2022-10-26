@@ -42,7 +42,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         # TODO
         if current_user.present?
-          current_user.confirm
+          current_user.skip_confirmation!
         end
         # @user.skip_confirmation_notification!
       end
@@ -57,7 +57,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             flash[:alert] = "Die Email-Adresse, die im Servicekonto hinterlegt ist, wird bereits mit einem anderen Consul-Konto verwendet. Bitte loggen Sie sich mit dem anderen Konto ein."
             redirect_to(account_path) and return
           else
-            current_user.update!(email: auth.info.email)
+            begin
+              current_user.update!(email: auth.info.email)
+            rescue StandardError
+            end
           end
         end
 
