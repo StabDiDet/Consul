@@ -40,6 +40,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if provider == :servicekonto_nrv
         existing_non_logined_user_with_same_email = nil
 
+        puts "current_user.present?: #{current_user.present?}"
+        puts "current_user.verified_at.blank?: #{current_user.verified_at.blank?}"
+        puts "current_user.verified_at.blank?: #{current_user.email != auth.info.email}"
+
         if current_user.present? && current_user.email != auth.info.email
           existing_non_logined_user_with_same_email = User.find_by(email: auth.info.email)
           puts "existing_non_logined_user_with_same_email: #{existing_non_logined_user_with_same_email}"
@@ -57,8 +61,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         )
 
         puts "should_be_verified: #{user_should_be_verified}"
-        puts "current_user.present?: #{current_user.present?}"
-        puts "current_user.verified_at.blank?: #{current_user.verified_at.blank?}"
         puts "existing_non_logined_user_with_same_email: #{existing_non_logined_user_with_same_email}"
       end
 
