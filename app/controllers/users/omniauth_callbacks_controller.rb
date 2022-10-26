@@ -39,12 +39,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       if provider == :servicekonto_nrv
         @user.skip_confirmation!
-
-        # TODO
-        if current_user.present?
-          current_user.skip_confirmation!
-        end
-        # @user.skip_confirmation_notification!
+        @user.skip_confirmation_notification!
       end
 
       if provider == :servicekonto_nrv
@@ -58,6 +53,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             redirect_to(account_path) and return
           else
             begin
+              # TODO
+              if current_user.present?
+                current_user.skip_confirmation!
+              end
               current_user.update!(email: auth.info.email)
             rescue StandardError
             end
