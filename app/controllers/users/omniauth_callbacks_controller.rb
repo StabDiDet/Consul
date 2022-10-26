@@ -57,7 +57,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             # current_user.skip_confirmation_notification!
 
             # current_user.update!(email: auth.info.email)
-            current_user.update_column(:email:, auth.info.email)
+            current_user.update_column(:email, auth.info.email)
           end
         end
 
