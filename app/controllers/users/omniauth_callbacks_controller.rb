@@ -53,10 +53,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             redirect_to(account_path) and return
           else
               # TODO
-            current_user.skip_confirmation!
-            current_user.skip_confirmation_notification!
+            # current_user.skip_confirmation!
+            # current_user.skip_confirmation_notification!
 
-            current_user.update!(email: auth.info.email)
+            # current_user.update!(email: auth.info.email)
+            current_user.update_column(:email:, auth.info.email)
           end
         end
 
