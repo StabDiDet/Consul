@@ -38,6 +38,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       user_should_be_verified = false
 
       if provider == :servicekonto_nrv
+        @user.skip_confirmation!
+        # @user.skip_confirmation_notification!
+      end
+
+      if provider == :servicekonto_nrv
         existing_non_logined_user_with_same_email = nil
 
         if current_user.present? && current_user.email != auth.info.email
@@ -48,18 +53,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             redirect_to(account_path) and return
           else
             current_user.update!(email: auth.info.email)
-            current_user.confirm
           end
         end
 
         user_should_be_verified = (
           @user.new_record? || (current_user.present? && current_user.verified_at.blank? && existing_non_logined_user_with_same_email.blank?)
         )
-      end
-
-      if provider == :servicekonto_nrv
-        @user.skip_confirmation!
-        @user.skip_confirmation_notification!
       end
 
       if save_user
