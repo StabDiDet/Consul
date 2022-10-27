@@ -49,7 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           existing_non_logined_user_with_same_email = User.find_by(email: auth.info.email)
 
           if existing_non_logined_user_with_same_email.present?
-            flash[:alert] = "Die Email-Adresse, die im Servicekonto hinterlegt ist, wird bereits mit einem anderen Consul-Konto verwendet. Bitte loggen Sie sich mit dem anderen Konto ein."
+            flash[:alert] = I18n.t("custom.verification.servicekonto_nrv.flash.account_exist")
             redirect_to(account_path) and return
           else
               # TODO
@@ -62,7 +62,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         user_should_be_verified = (
-          @user.new_record? || (current_user.present? && current_user.verified_at.blank? && existing_non_logined_user_with_same_email.blank?)
+          @user.new_record? || (
+            current_user.present? &&
+            current_user.verified_at.blank? &&
+            existing_non_logined_user_with_same_email.blank?
+          )
         )
       end
 
@@ -74,7 +78,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         if provider == :servicekonto_nrv && current_user.present?
-          flash[:notice] = "Erfolgreich identifiziert als Servicekonto_nrv."
+          flash[:notice] = I18n.t("custom.verification.servicekonto_nrv.flash.success")
           redirect_to(account_path) and return
         end
 
