@@ -46,6 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         existing_non_logined_user_with_same_email = nil
 
         if current_user.present? && current_user.email != auth.info.email
+
           existing_non_logined_user_with_same_email = User.find_by(email: auth.info.email)
 
           if existing_non_logined_user_with_same_email.present?
@@ -61,11 +62,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           end
         end
 
+        user_trust_level = auth.extra.raw_info['http://www.governikus.de/sk/name']['http://www.governikus.de/family_name_trust_level']
+
         user_should_be_verified = (
           @user.new_record? || (
             current_user.present? &&
             current_user.verified_at.blank? &&
-            existing_non_logined_user_with_same_email.blank?
+            existing_non_logined_user_with_same_email.blank? &&
+            user_trust_level == 'substantial'
           )
         )
       end
