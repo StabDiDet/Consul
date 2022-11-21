@@ -138,6 +138,21 @@ class User < ApplicationRecord
     !unverified?
   end
 
+  def self.first_or_initialize_for_servicekonto_oauth(auth)
+    oauth_email           = auth.info.email
+    oauth_email_confirmed = oauth_email.present? && (auth.info.verified || auth.info.verified_email)
+    oauth_user            = User.find_by(email: oauth_email)
+
+    oauth_user || User.new(
+      username:  auth.info.name || auth.uid,
+      email: oauth_email,
+      oauth_email: oauth_email,
+      password: Devise.friendly_token[0, 20],
+      terms_of_service: "1",
+      confirmed_at: oauth_email_confirmed ? DateTime.current : nil
+    )
+  end
+
   private
 
     def update_qualified_votes_count_for_budget_investments
