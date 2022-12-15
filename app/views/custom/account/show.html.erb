@@ -130,10 +130,8 @@
                       <span class="icon-check"></span>
                       <%= t("account.show.verified_account") %>
                     </p>
-                  <% elsif extended_feature?("verification.manual_verifications") %>
-                    <%= link_to t("account.show.verify_my_account"), user_servicekonto_nrv_omniauth_authorize_path, class: "button success", method: :post %>
                   <% else %>
-                    <%= link_to t("account.show.verify_my_account"), user_servicekonto_nrv_omniauth_authorize_path, class: "button success" %>
+                    <%= link_to t("account.show.verify_my_account"), user_servicekonto_nrv_omniauth_authorize_path, class: "button success", method: :post %>
                   <% end %>
                 </span>
               </div>
