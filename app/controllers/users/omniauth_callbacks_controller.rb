@@ -88,19 +88,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def verify_user_with_servicekonto(user, auth)
       address_data = auth.extra.raw_info["http://www.governikus.de/sk/addresses"]
       street = address_data.street_address
-
       geozone = Geozone.find_with_plz(address_data.postal_code)
-      unique_stamp = user.prepare_unique_stamp
 
-      user.update!(
+      user.assign_attributes(
+        first_name: address_data.given_name,
+        last_name: address_data.family_name,
         street_name: street.gsub(/\s\d+/, ""),
         street_number: street.match(/\d+/)[0],
-        city_name: address_data.locality,
-        geozone: geozone,
-        date_of_birth: DateTime.parse(auth.extra.raw_info.birthdate),
         plz: address_data.postal_code,
-        unique_stamp: unique_stamp,
+        city_name: address_data.locality,
+        date_of_birth: DateTime.parse(auth.extra.raw_info.birthdate),
+        geozone: geozone,
         verified_at: Time.current
       )
+
+      user.unique_stamp = user.prepare_unique_stamp
+
+      user.save!
     end
 end
