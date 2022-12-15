@@ -91,8 +91,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       geozone = Geozone.find_with_plz(address_data.postal_code)
 
       user.assign_attributes(
-        first_name: address_data.given_name,
-        last_name: address_data.family_name,
+        first_name: auth.extra.raw_info.given_name,
+        last_name: auth.extra.raw_info.family_name,
         street_name: street.gsub(/\s\d+/, ""),
         street_number: street.match(/\d+/)[0],
         plz: address_data.postal_code,
