@@ -90,15 +90,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       street = address_data.street_address
 
       geozone = Geozone.find_with_plz(address_data.postal_code)
+      unique_stamp = user.prepare_unique_stamp
 
       user.update!(
         street_name: street.gsub(/\s\d+/, ""),
         street_number: street.match(/\d+/)[0],
         city_name: address_data.locality,
-        verified_at: Time.current,
         geozone: geozone,
         date_of_birth: DateTime.parse(auth.extra.raw_info.birthdate),
-        plz: address_data.postal_code
+        plz: address_data.postal_code,
+        unique_stamp: unique_stamp,
+        verified_at: Time.current
       )
     end
 end

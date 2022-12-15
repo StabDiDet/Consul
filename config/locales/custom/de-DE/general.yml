@@ -297,7 +297,8 @@ de:
       sign_up: Registrierung mit Twitter
       name: Twitter
     servicekonto_nrv:
-      name: "Servicekonto.nrv"
+      name: "Servicekonto.NRW"
+      sign_in: "Melden Sie sich mit dem Servicekonto.NRW an"
     info:
       sign_in: "Anmelden mit:"
       sign_up: "Registrierung mit:"
