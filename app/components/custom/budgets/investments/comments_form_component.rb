@@ -22,6 +22,6 @@ class Budgets::Investments::CommentsFormComponent < ApplicationComponent
         city: Setting["org_name"],
         geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
         age_restriction: @investment.budget.budget_phase.age_restriction_formatted
-       ), attributes: %w(rel data-method))
+       ), attributes: %w(rel data-method href))
     end
 end

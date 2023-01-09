@@ -12,7 +12,7 @@ module LegislationHelper
                city: Setting["org_name"],
                geozones: legislation_phase.geozone_restrictions_formatted,
                age_restriction: legislation_phase.age_restriction_formatted
-              ), attributes: %w(rel data-method))
+              ), attributes: %w(rel data-method href))
     end
   end
 end
