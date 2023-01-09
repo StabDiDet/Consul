@@ -50,7 +50,7 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
           verify: link_to_verify_account,
           city: Setting["org_name"],
           geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
-          age_restriction: @investment.budget.budget_phase.age_restriction_formatted), attributes: %w(rel data-method href))
+          age_restriction: @investment.budget.budget_phase.age_restriction_formatted), attributes: %w(class rel data-method href))
       end
     end
 

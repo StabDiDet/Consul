@@ -23,7 +23,7 @@ class Debates::VotesComponent < ApplicationComponent
               city: Setting["org_name"],
               geozones: @debate_phase&.geozone_restrictions_formatted,
               age_restriction: @debate_phase&.age_restriction_formatted
-        ), attributes: %w(rel data-method href))
+        ), attributes: %w(class rel data-method href))
 
       end
     end
