@@ -20,7 +20,7 @@
           <% elsif require_verified_resident_for_commentable?(commentable, current_user) %>
             <br>
             <div data-alert class="callout primary">
-              <%= sanitize(t("comments.verified_only", verify_account: link_to_verify_account)) %>
+              <%= sanitize(t("comments.verified_only", verify_account: link_to_verify_account), attributes: %w(rel data-method)) %>
             </div>
           <% elsif !valuation || can?(:comment_valuation, commentable) %>
             <%= render "comments/form", { commentable: commentable,

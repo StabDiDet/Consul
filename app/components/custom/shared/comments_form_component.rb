@@ -33,7 +33,7 @@ class Shared::CommentsFormComponent < ApplicationComponent
                  city: Setting["org_name"],
                  geozones: projekt_phase.geozone_restrictions_formatted,
                  age_restriction: projekt_phase.age_restriction_formatted
-        ))
+        ), attributes: %w(rel data-method))
 
       end
     end

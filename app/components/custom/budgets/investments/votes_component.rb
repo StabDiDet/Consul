@@ -11,12 +11,12 @@ class Budgets::Investments::VotesComponent < ApplicationComponent
           sign_in: link_to_signin, sign_up: link_to_signup)
 
       elsif reason.present?
-        t(path_to_key,
+        sanitize(t(path_to_key,
           verify: link_to_verify_account,
           city: Setting["org_name"],
           geozones: investment.budget.budget_phase.geozone_restrictions_formatted,
           age_restriction: investment.budget.budget_phase.age_restriction_formatted
-         )
+         ), attributes: %w(rel data-method))
       end
     end
 

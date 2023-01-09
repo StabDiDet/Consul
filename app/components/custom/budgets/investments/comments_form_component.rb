@@ -15,13 +15,13 @@ class Budgets::Investments::CommentsFormComponent < ApplicationComponent
     end
 
     def cannot_comment_reason
-      t("custom.comments.restricted.#{reason}",
+      sanitize(t("custom.comments.restricted.#{reason}",
         signin: link_to_signin,
         signup: link_to_signup,
         verify_account: link_to_verify_account,
         city: Setting["org_name"],
         geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
         age_restriction: @investment.budget.budget_phase.age_restriction_formatted
-       )
+       ), attributes: %w(rel data-method))
     end
 end

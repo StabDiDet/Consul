@@ -8,7 +8,7 @@
   <div class="participation-not-allowed">
     <p>
       <%= sanitize(t("legislation.questions.participation.verified_only",
-          verify_account: link_to_verify_account)) %>
+          verify_account: link_to_verify_account), attributes: %w(rel data-method)) %>
     </p>
   </div>
 <% elsif !user_signed_in? %>
