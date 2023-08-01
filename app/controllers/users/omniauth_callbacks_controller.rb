@@ -87,19 +87,33 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def verify_user_with_servicekonto(user, auth)
       address_data = auth.extra.raw_info["http://www.governikus.de/sk/addresses"]
-      street = address_data.street_address
+      city_name = address_data.locality
+      street_name = address_data.street_address.split[0...-1].join(" ")
+      street_number = address_data.street_address.split[-1].match(/\d+/).to_s
+      street_number_extension = address_data.street_address.split[-1].match(/\d+([a-zA-Z]*)$/)&.captures&.first.to_s
       geozone = Geozone.find_with_plz(address_data.postal_code)
+
+      registered_address_street_id = RegisteredAddress::Street.find_by(name: street_name).id
+      registered_address_city_id = RegisteredAddress::City.find_by(name: city_name).id
+
+      registered_address = RegisteredAddress.find_by(
+        street_number: street_number,
+        street_number_extension: street_number_extension,
+        registered_address_street_id: registered_address_street_id,
+        registered_address_city_id: registered_address_city_id
+      )
+
 
       user.assign_attributes(
         first_name: auth.extra.raw_info.given_name,
         last_name: auth.extra.raw_info.family_name,
-        street_name: street.gsub(/\s\d+/, ""),
-        street_number: street.match(/\d+/)[0],
+        street_name: address_data.street_address,
         plz: address_data.postal_code,
         city_name: address_data.locality,
         date_of_birth: DateTime.parse(auth.extra.raw_info.birthdate),
         geozone: geozone,
-        verified_at: Time.current
+        verified_at: Time.current,
+        registered_address: registered_address
       )
 
       user.unique_stamp = user.prepare_unique_stamp
