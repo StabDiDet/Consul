@@ -90,7 +90,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       city_name = address_data.locality
       street_name = address_data.street_address.split[0...-1].join(" ")
       street_number = address_data.street_address.split[-1].match(/\d+/).to_s
-      street_number_extension = address_data.street_address.split[-1].match(/\d+([a-zA-Z]*)$/)&.captures&.first.to_s
+      street_number_extension = address_data.street_address.split[-1].match(/\d+([a-zA-Z]*)$/)&.captures&.first.to_s.presence
       geozone = Geozone.find_with_plz(address_data.postal_code)
 
       registered_address_street_id = RegisteredAddress::Street.find_by(name: street_name)&.id
