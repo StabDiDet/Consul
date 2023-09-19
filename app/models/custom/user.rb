@@ -61,7 +61,9 @@ class User < ApplicationRecord
       email: oauth_email,
       oauth_email: oauth_email,
       password: Devise.friendly_token[0, 20],
-      terms_of_service: "1",
+      terms_data_storage: "1",
+      terms_data_protection: "1",
+      terms_general: "1",
       confirmed_at: oauth_email_confirmed ? DateTime.current : nil
     )
   end
